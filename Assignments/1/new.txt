@@ -1,0 +1,22 @@
+[org 0x0100]
+	mov si,-2
+	mov bx,0
+	mov cx,[rows]
+	add cx,1
+loop1:
+	sub cx,1
+	add si,2
+	mov ax,[matrix+bx]
+	mov [tarnspose+si],ax
+	
+	add bx,[columns]
+	mul bx,2	
+	cmp cx,0
+	jne loop1
+	mov ax,0x4c00
+	int 21h
+
+matrix: dw 1,2,3,4,5,6,7,8,9,10
+transpose: dw 0,0,0,0,0,0,0,0,0,0
+rows: dw 2
+columns: dw 5
